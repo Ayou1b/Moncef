@@ -167,7 +167,7 @@ client.on('guildMemberAdd',async member => {
     if(welcome[member.guild.id].onoff === 'Off') return;
     const Canvas = require('canvas');
     const jimp = require('jimp');
-    const w = ['./welcome.png'];
+    const w = ['./welcome_sg.png'];
           let Image = Canvas.Image,
               canvas = new Canvas(800, 300),
               ctx = canvas.getContext('2d');
