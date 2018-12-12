@@ -4,7 +4,7 @@ const fs = require('fs')
 const moment = require('moment')
 
 const ms = require('ms')
-const prefix = '-';
+const prefix = '#';
 const jimp = require('jimp');
 client.on('message', message => {
      var prefix = "-"
@@ -285,7 +285,7 @@ client.on("guildMemberAdd", member => {
       
 client.on('ready', () => {
    console.log(`----------------`);
-      console.log(`Panorama Bot- Script By : Randy`);
+      console.log(`Randy Bot- Script By : Randy`);
         console.log(`----------------`);
       console.log(`ON ${client.guilds.size} Servers '     Script By : Randy ' `);
     console.log(`----------------`);
@@ -356,25 +356,77 @@ client.on('message', message => {
 
  message.author.sendMessage(`
  **
--ban --> حظر عضو
--kick --> طرد عضو 
-مسح --> مسح الشات
--mute --> اعطاء شخص ميوت
--unmute --> فك من شخص ميوت
--obc --> لنشر برودكاست لكل اعضاء السيرفر 
--server --> معلومات السيرفر 
+#ban --> حظر عضو
+#kick --> طرد عضو 
+مسح# --> مسح الشات
+#mute --> اعطاء شخص ميوت
+#unmute --> فك من شخص ميوت
+#obc --> لنشر برودكاست لكل اعضاء السيرفر 
+#server --> معلومات السيرفر 
 رابط --> اظهار رابط السيرفر خآص 
--setWelcomer --> تفعيل ترحيب بصوره 
--toggleInvitedby --> تفعيل تم دعوته بواسطة 
--toggleDmwelcomer --> تفعيل الترحيب علخاص 
--toggleWelcomer -->توقيف الترحيب بالخاص و الصوره و تم دعوته 
+#setWelcomer --> تفعيل ترحيب بصوره 
+#toggleInvitedby --> تفعيل تم دعوته بواسطة 
+#toggleDmwelcomer --> تفعيل الترحيب علخاص 
+#toggleWelcomer -->توقيف الترحيب بالخاص و الصوره و تم دعوته 
+#move --> سحب عضو 
+#role --> اعطاءرتبه
 **
 `);
 
     }
 });
+/////////////////////////////////////////
+client.on("message", message => {
+	var prefix = "#";
+	var args = message.content.split(' ').slice(1); 
+	var msg = message.content.toLowerCase();
+	if( !message.guild ) return;
+	if( !msg.startsWith( prefix + 'role' ) ) return;
+	if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(' **__ليس لديك صلاحيات__**');
+	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
+		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد سحب منه الرتبة**' );
+		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );
+		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
+		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
+		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );if( message.mentions.members.first() ){
+			message.mentions.members.first().removeRole( role1 );
+			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم سحب من **');
+		}
+		if( args[0].toLowerCase() == "all" ){
+			message.guild.members.forEach(m=>m.removeRole( role1 ))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من الكل رتبة**');
+		} else if( args[0].toLowerCase() == "bots" ){
+			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.removeRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البوتات رتبة**');
+		} else if( args[0].toLowerCase() == "humans" ){
+			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.removeRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البشريين رتبة**');
+		} 	
+	} else {
+		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد اعطائها الرتبة**' );
+		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );
+		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
+		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
+		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );if( message.mentions.members.first() ){
+			message.mentions.members.first().addRole( role1 );
+			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم اعطاء **');
+		}
+		if( args[0].toLowerCase() == "all" ){
+			message.guild.members.forEach(m=>m.addRole( role1 ))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء الكل رتبة**');
+		} else if( args[0].toLowerCase() == "bots" ){
+			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.addRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البوتات رتبة**');
+		} else if( args[0].toLowerCase() == "humans" ){
+			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.addRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البشريين رتبة**');
+		} 
+	} 
+});
+//////////////////////////////////////////////
+
 const adminprefix = "-";
-const developers = ['399353508429824000'];
+const developers = ['399353508429824000 ', '418485485632225281'];
 
 
 
@@ -587,7 +639,37 @@ client.on('message', message => {
 		   }
 		});
 //////////////////////////////////////////////////////////
-
+client.on('message', message => {
+	var prefix = "#";
+if(!message.channel.guild) return;
+if(message.content.startsWith(prefix + 'move')) {
+ if (message.member.hasPermission("MOVE_MEMBERS")) {
+ if (message.mentions.users.size === 0) {
+ return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
+}
+if (message.member.voiceChannel != null) {
+ if (message.mentions.members.first().voiceChannel != null) {
+ var authorchannel = message.member.voiceChannelID;
+ var usermentioned = message.mentions.members.first().id;
+var embed = new Discord.RichEmbed()
+ .setTitle("Succes!")
+ .setColor("#000000")
+ .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك✅ `)
+var embed = new Discord.RichEmbed()
+.setTitle(`You are Moved in ${message.guild.name}`)
+ .setColor("RANDOM")
+.setDescription(`**<@${message.author.id}> Moved You To His Channel!\nServer --> ${message.guild.name}**`)
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
+message.guild.members.get(usermentioned).send(embed)
+} else {
+message.channel.send("``لا تستطيع سحب "+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
+}
+} else {
+ message.channel.send("**``يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك``**")
+}
+} else {
+message.react("❌")
+ }}});
 		
 		
   
