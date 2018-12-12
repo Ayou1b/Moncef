@@ -199,13 +199,13 @@ client.on('guildMemberAdd',async member => {
             ctx.fontSize = '72px';
             ctx.fillStyle = "#ffffff";
             ctx.textAlign = "center";
-            ctx.fillText(member.user.username, 545, 177);
+            ctx.fillText(member.user.username, 550, 240);
            
             ctx.font = '16px Arial Bold';
             ctx.fontSize = '72px';
-            ctx.fillStyle = "#ffffff";
+            ctx.fillStyle = "#ff0000";
             ctx.textAlign = "center";
-            ctx.fillText(`${member.guild.memberCount} Members`, 580, 200);
+            ctx.fillText(`${member.guild.memberCount} Members`, 550, 270);
            
             let Avatar = Canvas.Image;
             let ava = new Avatar;
@@ -214,7 +214,7 @@ client.on('guildMemberAdd',async member => {
             ctx.arc(169.5, 148, 126.9, -100, Math.PI * 2, true);
             ctx.closePath();
             ctx.clip();
-            ctx.drawImage(ava, 36, 21, 260, 260);
+            ctx.drawImage(ava, 60, 110, 200, 200);
              
             let c = member.guild.channels.find('name', `${welcome[member.guild.id].channel}`)
             if(!c) return;
