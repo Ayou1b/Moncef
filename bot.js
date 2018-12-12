@@ -585,10 +585,8 @@ client.on('message', message => {
             
 		   }
 		});
-const adminprefix = "-";
+//////////////////////////////////////////////////////////
 const developers = ['399353508429824000'];
-
-
 
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
