@@ -6,8 +6,13 @@ const moment = require('moment')
 const ms = require('ms')
 const prefix = '#';
 const jimp = require('jimp');
+
+client.on('guildMemberAdd', member=> {
+    member.addRole(member.guild.roles.find("name","Púre"));
+    });
+
 client.on('message', message => {
-     var prefix = "-"
+     var prefix = "#"
 if (message.content.startsWith(prefix + "uptime")) {
     let uptime = client.uptime;
  
