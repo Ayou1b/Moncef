@@ -256,7 +256,7 @@ client.on('guildMemberAdd', member => {
     const logChannel = member.guild.channels.find(channel => channel.name === `${welcome[member.guild.id].channel}`);
     if(!logChannel) return;
       setTimeout(() => {
-    logChannel.send(`Invited By: <@${inviter.id}>`);
+    logChannel.send(`**Invited By:** <@${inviter.id}>`);
   },2000)
   });
 });
@@ -433,42 +433,7 @@ client.on("message", message => {
 });
 //////////////////////////////////////////////
 
-const adminprefix = "#vip";
-const developers = ['399353508429824000 ', '418485485632225281'];
 
-
-
-client.on('message', message => {
-    var argresult = message.content.split(` `).slice(1).join(' ');
-      if (!developers.includes(message.author.id)) return;
-  if (message.content.startsWith(adminprefix + 'ply')) {
-    client.user.setGame(argresult);
-      message.channel.send(`تم تغيير البلاينق الى   ${argresult}`)
-  } else 
-     if (message.content === (adminprefix + "leave")) {
-    message.guild.leave();        
-  } else  
-  if (message.content.startsWith(adminprefix + 'wt')) {
-  client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.send(`تَم تغيير الواتشينق الى   ${argresult}`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'ls')) {
-  client.user.setActivity(argresult , {type:'LISTENING'});
-      message.channel.send(`تَم تغيير الليسينينق الى   ${argresult}`)
-  } else
-  if (message.content.startsWith(adminprefix + 'st')) {
-    client.user.setGame(argresult, "https://www.twitch.tv/osama");
-      message.channel.send(`تم تغييرك حالتك بالتويتش الى   ${argresult}`)
-  }
-  if (message.content.startsWith(adminprefix + 'sn')) {
-  client.user.setUsername(argresult).then
-      message.channel.send(`جاري تغيير الأسم لـ ..${argresult} `)
-} else
-if (message.content.startsWith(adminprefix + 'sa')) {
-  client.user.setAvatar(argresult);
-    message.channel.send(`جاري تغيير الأفتار... : `);
-}
-});
 
    client.on("message", message => {
      if (message.author.bot) return;
