@@ -327,7 +327,7 @@ client.on('message', message => {
 client.on('message', function(msg) {
     
     if(msg.content.startsWith (prefix  +'server')) {
- if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **").catch(console.error);
+
       let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(msg.guild.iconURL)
