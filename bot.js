@@ -374,8 +374,11 @@ client.on('message', message => {
 #toggleDmwelcomer --> تفعيل الترحيب علخاص 
 #toggleWelcomer -->توقيف الترحيب بالخاص و الصوره و تم دعوته 
 #move --> سحب عضو 
+#id --> معلومات العضو
 #role --> اعطاءرتبه
 **
+
+
 `);
 
     }
@@ -430,7 +433,7 @@ client.on("message", message => {
 });
 //////////////////////////////////////////////
 
-const adminprefix = "-";
+const adminprefix = "#";
 const developers = ['399353508429824000 ', '418485485632225281'];
 
 
@@ -675,8 +678,49 @@ message.channel.send("``لا تستطيع سحب "+ message.mentions.members.fir
 } else {
 message.react("❌")
  }}});
-		
-		
+client.on('message', message => {
+    if (message.content === "#id") {
+    var year = message.createdAt.getFullYear()
+    var month = message.createdAt.getMonth()
+    var day = message.createdAt.getDate()
+         let embed = new Discord.RichEmbed()
+         .setAuthor(message.author.username, message.author.avatarURL)
+      .setThumbnail(message.author.avatarURL)
+        .addField("**اسمك:**",  '**[ ' + `${message.author.username}` + ' ]**')
+          .setThumbnail(message.author.avatarURL)
+                   .setFooter(`${message.author.username}`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')
+      .addField('الكود الخاص بك:', message.author.discriminator)
+      .addField("**عدد الايام منذ افتتاح حسابك:**", message.author.createdAt.getDate())
+        .addField("** تم افتتاح حسابك عام:**", message.createdAt.getFullYear())
+            .addField("** عدد الشهور منذ افتتاح حسابك:**", message.createdAt.getMonth())
+    
+      message.channel.send({embed});
+        }
+    });	
+client.on('message',async message => {
+  if(message.content.startsWith("#setvoice")) {
+  if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
+  if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **ليس معي الصلاحيات الكافية**');
+  message.channel.send('✅| **تم عمل الروم بنجاح**');
+  message.guild.createChannel(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
+    console.log(`Voice online channel setup for guild: \n ${message.guild.name}`);
+    c.overwritePermissions(message.guild.id, {
+      CONNECT: false,
+      SPEAK: false
+    });
+    setInterval(() => {
+      c.setName(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]`)
+    },1000);
+  });
+  }
+});	
+
+client.on('guildMemberAdd', (member) => {
+let channel = client.channels.get('522378672792010780')
+if(member.user.bot) {
+channel.send(`${member} **Welcome To Púre Server  :shamrock:**`)
+}
+})	
   
  
 		
