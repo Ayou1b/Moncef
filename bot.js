@@ -433,7 +433,7 @@ client.on("message", message => {
 });
 //////////////////////////////////////////////
 
-const adminprefix = "#";
+const adminprefix = "#vip";
 const developers = ['399353508429824000 ', '418485485632225281'];
 
 
