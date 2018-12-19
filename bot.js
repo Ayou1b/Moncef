@@ -4,7 +4,7 @@ const fs = require('fs')
 const moment = require('moment')
 
 const ms = require('ms')
-const prefix = '#';
+const prefix = '-';
 const jimp = require('jimp');
 
 client.on('guildMemberAdd', member=> {
@@ -12,7 +12,7 @@ client.on('guildMemberAdd', member=> {
     });
 
 client.on('message', message => {
-     var prefix = "#"
+     var prefix = "-"
 if (message.content.startsWith(prefix + "uptime")) {
     let uptime = client.uptime;
  
@@ -369,10 +369,6 @@ client.on('message', message => {
 #obc --> لنشر برودكاست لكل اعضاء السيرفر 
 #server --> معلومات السيرفر 
 رابط --> اظهار رابط السيرفر خآص 
-#setWelcomer --> تفعيل ترحيب بصوره 
-#toggleInvitedby --> تفعيل تم دعوته بواسطة 
-#toggleDmwelcomer --> تفعيل الترحيب علخاص 
-#toggleWelcomer -->توقيف الترحيب بالخاص و الصوره و تم دعوته 
 #move --> سحب عضو 
 #id --> معلومات العضو
 #role --> اعطاءرتبه
@@ -385,7 +381,7 @@ client.on('message', message => {
 });
 /////////////////////////////////////////
 client.on("message", message => {
-	var prefix = "#";
+	var prefix = "-";
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
 	if( !message.guild ) return;
@@ -440,7 +436,7 @@ client.on("message", message => {
      
      let command = message.content.split(" ")[0];
      
-     if (command === "#mute") {
+     if (command === "-mute") {
            if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **").catch(console.error);
      let user = message.mentions.users.first();
      let modlog = client.channels.find('name', 'log');
@@ -474,7 +470,7 @@ client.on("message", message => {
      
      let command = message.content.split(" ")[0];
      
-     if (command === "#unmute") {
+     if (command === "-unmute") {
            if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **").catch(console.error);
      let user = message.mentions.users.first();
      let modlog = client.channels.find('name', 'log');
@@ -502,7 +498,7 @@ client.on("message", message => {
    
    });
    client.on('message', message => {
-  var prefix = "#";
+  var prefix = "-";
   if (message.author.omar) return;
   if (!message.content.startsWith(prefix)) return;
   var command = message.content.split(" ")[0];
@@ -546,7 +542,7 @@ client.on("message", message => {
 });
 //////
 client.on('message', message => {
-	var prefix = "#";
+	var prefix = "-";
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
  
@@ -594,7 +590,7 @@ client.on('message', message => {
 
 	client.on("message", message => {
               var args = message.content.substring(prefix.length).split(" ");
-              if (message.content.startsWith(prefix + "مسح")) {
+              if (message.content.startsWith(prefix + "clear")) {
                   if(!message.channel.guild) return message.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');         
      if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**⚠  لا يوجد لديك صلاحية لمسح الشات**');
           var msg;
@@ -602,7 +598,7 @@ client.on('message', message => {
         
         message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
         message.channel.sendMessage("", {embed: {
-          title: "``تــم مسح الشات ``",
+          title: "تــم مسح الشات",
           color: 0x06DF00,
           footer: {
             
@@ -613,7 +609,7 @@ client.on('message', message => {
 		});
 //////////////////////////////////////////////////////////
 client.on('message', message => {
-	var prefix = "#";
+	var prefix = "-";
 if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'move')) {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
@@ -644,7 +640,7 @@ message.channel.send("``لا تستطيع سحب "+ message.mentions.members.fir
 message.react("❌")
  }}});
 client.on('message', message => {
-    if (message.content === "#id") {
+    if (message.content === "-id") {
     var year = message.createdAt.getFullYear()
     var month = message.createdAt.getMonth()
     var day = message.createdAt.getDate()
@@ -663,7 +659,7 @@ client.on('message', message => {
         }
     });	
 client.on('message',async message => {
-  if(message.content.startsWith("#setvoice")) {
+  if(message.content.startsWith("-setvoice")) {
   if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
   if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **ليس معي الصلاحيات الكافية**');
   message.channel.send('✅| **تم عمل الروم بنجاح**');
