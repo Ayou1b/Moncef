@@ -7,10 +7,7 @@ const ms = require('ms')
 const prefix = '-';
 const jimp = require('jimp');
 
-const adminprefix = "-";
 const developers = ['الايدي' ,'399353508429824000'];
-
-
 
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
@@ -179,7 +176,7 @@ client.on('message', message => {
 #move --> سحب عضو 
 #id --> معلومات العضو
 #role --> اعطاءرتبه
-#roleall --> اعطاءرتبه للكل
+#role all --> اعطاءرتبه للكل
 #setvoice  --> انشاء عداد للفويس 
 **
 
